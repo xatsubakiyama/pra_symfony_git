@@ -12,6 +12,9 @@ class ToppageController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('Toppage/index.html.twig');
+        $information = "5月と6月の公演情報を追加しました。";
+
+
+        return $this->render('Toppage/index.html.twig', ['information' => $information]);
     }
 }
