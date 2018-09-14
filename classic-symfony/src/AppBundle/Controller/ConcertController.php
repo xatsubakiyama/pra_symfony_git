@@ -10,7 +10,7 @@ class ConcertController extends Controller
     /**
      * @Route("/concert/")
      */
-    public function indexAction()
+        public function indexAction()
     {
         $concertList = [
             [
