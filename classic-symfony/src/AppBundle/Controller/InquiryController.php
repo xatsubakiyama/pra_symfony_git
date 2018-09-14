@@ -67,7 +67,7 @@ class InquiryController extends Controller
 
             $message = \Swift_Message::newInstance()
                 ->setSubject('Webサイトからのお問い合わせ')
-                ->setFrom('webmaster@example.com')
+                ->setFrom('k.tsubaki.2@gmail.com')
                 ->setTo('admin@example.com')
                 ->setBody(
                     $this->renderView(
