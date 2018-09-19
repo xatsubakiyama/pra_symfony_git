@@ -8,20 +8,9 @@ class BlogController extends Controller
 {
     public function latestListAction()
     {
-        $blogList = [
-            [
-                'targetDate' => '2015年3月10日',
-                'title' => '東京公演レポート',
-            ],
-            [
-                'targetDate' => '2015年2月8日',
-                'title' => '最近の練習風景',
-            ],
-            [
-                'targetDate' => '2015年1月3日',
-                'title' => '本年もよろしくお願い致します',
-            ],
-        ];
+        $em = $this->getDoctrine()->getManager();   /*エンティティマネージャを取得*/
+        $blogArticleRepository = $em->getRepository('AppBundle:BlogArticle');   /*エンティティマネージャからエンティティリポジトリを取得*/
+        $blogList = $blogArticleRepository->findBy([], ['targetDate' => 'DESC']);   /*エンティティリポジトリのファインダメソッドを実行して情報を取得*/
 
         return $this->render('Blog/latestList.html.twig',
             ['blogList' => $blogList]

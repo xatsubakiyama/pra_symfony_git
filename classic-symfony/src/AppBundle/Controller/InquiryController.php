@@ -15,7 +15,7 @@ class InquiryController extends Controller
 {
     private function createInquiryForm()
     {
-        return $this->createFormBuilder()
+        return $this->createFormBuilder(new Inquiry())
             ->add('name', 'text')
             ->add('email', 'text')
             ->add('tel', 'text', [
@@ -64,18 +64,11 @@ class InquiryController extends Controller
         $form->handleRequest($request);
         if ($form->isValid())
         {
-            $data = $form->getData();
+            $inquiry = $form->getData();   /*フォームからエンティティが取得できる*/
 
-            $inquiry = new Inquiry();
-            $inquiry->setName($data['name']);
-            $inquiry->setEmail($data['email']);
-            $inquiry->setTel($data['tel']);
-            $inquiry->setType($data['type']);
-            $inquiry->setContent($data['content']);
-
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($inquiry);
-            $em->flush();
+            $em = $this->getDoctrine()->getManager();   /*エンティティマネージャを取得*/
+            $em->persist($inquiry);   /*エンティティをdoctrine管理下へ*/
+            $em->flush();   /*変更分をデータベースへ適用*/
 
             $message = \Swift_Message::newInstance()
                 ->setSubject('Webサイトからのお問い合わせ')
@@ -84,7 +77,7 @@ class InquiryController extends Controller
                 ->setBody(
                     $this->renderView(
                         'mail/inquiry.txt.twig',
-                        ['data' => $data]
+                        ['data' => $inquiry]   /*エンティティを渡す*/
                     )
                 );
 
