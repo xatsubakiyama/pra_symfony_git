@@ -19,7 +19,7 @@
                 {#{{ form(form) }}#}
             {#</div>#}
             <div class="row pad-row">
-                {{ form_start(form) }}
+                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
                 <table class="table">
                     <tr>
                         <th><i class="fa fa-circle"></i> お名前</th>
