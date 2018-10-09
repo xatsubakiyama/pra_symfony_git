@@ -72,8 +72,8 @@ class InquiryController extends Controller
 
             $message = \Swift_Message::newInstance()
                 ->setSubject('Webサイトからのお問い合わせ')
-                ->setFrom('k.tsubaki.2@gmail.com')
-                ->setTo('admin@example.com')
+                ->setFrom('webmaster@example.com')
+                ->setTo('k.tsubaki.2@gmail.com')
                 ->setBody(
                     $this->renderView(
                         'mail/inquiry.txt.twig',
